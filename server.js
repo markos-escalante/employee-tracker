@@ -187,3 +187,52 @@ const addRole = () => {
     });
 }
 
+const viewEmployee = () => {
+    const query = "SELECT * FROM employee";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        employeeTracker(); 
+    });
+}
+
+const viewRole = () => {
+    const query = "SELECT * FROM employee_role";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        employeeTracker(); 
+    });
+}
+
+const viewDepartments = () => {
+    const query = "SELECT * FROM department";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        employeeTracker(); 
+    });
+}
+
+const updateRole = () => {
+    inquirer
+        .prompt({
+            name: "update_employee",
+            type: "input",
+            message: "Please enter the employee's id number that you would like to update"
+        },
+            {
+                name: "employee_new_role",
+                type: "input",
+                message: "Please enter the employee's new role"
+            }
+        )
+        .then(function (answer) {
+            const query = "UPDATE employee_role WHERE role_title = ? ";
+            connection.query(query, { answer }, function (err, res) {
+                if (err) throw err;
+                console.table(res);
+                employeeTracker();
+            });
+        });
+}
