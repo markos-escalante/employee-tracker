@@ -7,8 +7,8 @@ CREATE TABLE employee (
   id INT NOT NULL,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
-  role_id INT NULL, 
-  manager_id INT NULL, 
+  role_id INT DEFAULT NULL, 
+  manager_id INT DEFAULT NULL, 
   PRIMARY KEY (id)
 );
 

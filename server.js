@@ -16,13 +16,6 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
     employeeTracker();
-    addEmployee();
-    addRole();
-    addDepartment();
-    viewEmployee();
-    viewRole();
-    viewDepartments();
-    updateRole();
 });
 
 const employeeTracker = () => {
@@ -76,25 +69,25 @@ const employeeTracker = () => {
 
 const addEmployee = () => {
   inquirer
-    .prompt({
-      name: "employee_id",
+    .prompt([{
+      name: "id",
       type: "input",
       message: "Please enter the new employee's id."
     },
         {
-            name: "FirstName",
+            name: "first_name",
             type: "input",
             message: "Please enter employee's first name"
         },
         {
-            name: "LastName",
+            name: "last_name",
             type: "input",
             message: "Please enter the employee's last name."
-        }
+        }]
     )
       .then(function (answer) {
-          const query = "INSERT TO employee";
-          connection.query(query, { answer }, function (err, res) {
+          const query = "INSERT INTO employee SET ?";
+          connection.query(query, answer, function (err, res) {
               if (err) throw err;
               employeeTracker();
           }) 
@@ -103,7 +96,7 @@ const addEmployee = () => {
 
 const addRole = () => {
   inquirer
-    .prompt({
+    .prompt([{
       name: "employee_id",
       type: "input",
       message: "Please enter the employee's id."
@@ -122,7 +115,7 @@ const addRole = () => {
             name: "department_id",
             type: "input",
             message: "Please enter the employee's department id."
-        }
+        }]
     )
       .then(function (answer) {
           const query = "INSERT TO employee";
@@ -135,7 +128,7 @@ const addRole = () => {
 
 const addDepartment = () => {
   inquirer
-    .prompt({
+    .prompt([{
       name: "id",
       type: "input",
       message: "Please enter the new department's id."
@@ -144,39 +137,7 @@ const addDepartment = () => {
             name: "department_name",
             type: "input",
             message: "Please enter the department's name"
-        },
-    )
-      .then(function (answer) {
-          const query = "INSERT TO employee";
-          connection.query(query, { answer }, function (err, res) {
-              if (err) throw err;
-              employeeTracker();
-          }) 
-    });
-}
-
-const addRole = () => {
-  inquirer
-    .prompt({
-      name: "employee_id",
-      type: "input",
-      message: "Please enter the employee's id."
-    },
-    {
-        name: "employee_role",
-        type: "input",
-        message: "Please enter the employee's role."
-        },
-        {
-            name: "salary",
-            type: "input",
-            message: "Please enter the employee's salary."
-        },
-        {
-            name: "department_id",
-            type: "input",
-            message: "Please enter the employee's department id."
-        }
+        }],
     )
       .then(function (answer) {
           const query = "INSERT TO employee";
@@ -216,7 +177,7 @@ const viewDepartments = () => {
 
 const updateRole = () => {
     inquirer
-        .prompt({
+        .prompt([{
             name: "update_employee",
             type: "input",
             message: "Please enter the employee's id number that you would like to update"
@@ -225,7 +186,7 @@ const updateRole = () => {
                 name: "employee_new_role",
                 type: "input",
                 message: "Please enter the employee's new role"
-            }
+            }]
         )
         .then(function (answer) {
             const query = "UPDATE employee_role WHERE role_title = ? ";
