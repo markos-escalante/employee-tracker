@@ -87,7 +87,7 @@ const addEmployee = () => {
     )
       .then(function (answer) {
           const query = "INSERT INTO employee SET ?";
-          connection.query(query, answer, function (err, res) {
+          connection.query(query, answer, (err, res) => {
               if (err) throw err;
               employeeTracker();
           }) 
@@ -97,12 +97,12 @@ const addEmployee = () => {
 const addRole = () => {
   inquirer
     .prompt([{
-      name: "employee_id",
+      name: "id",
       type: "input",
       message: "Please enter the employee's id."
     },
     {
-        name: "employee_role",
+        name: "role_title",
         type: "input",
         message: "Please enter the employee's role."
         },
@@ -118,8 +118,8 @@ const addRole = () => {
         }]
     )
       .then(function (answer) {
-          const query = "INSERT TO employee";
-          connection.query(query, { answer }, function (err, res) {
+          const query = "INSERT INTO employee_role SET ?";
+          connection.query(query, answer, (err, res) => {
               if (err) throw err;
               employeeTracker();
           }) 
