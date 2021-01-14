@@ -15,21 +15,23 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  runSearch();
+  addEmployee();
 });
 
-function runSearch() {
+const addEmployee = () => {
   inquirer
     .prompt({
       name: "action",
       type: "rawlist",
-      message: "What would you like to do?",
+      message: "Welcome to the employee tracker! What would you like to do?",
       choices: [
-        "Find songs by artist",
-        "Find all artists who appear more than once",
-        "Find data within a specific range",
-        "Search for a specific song",
-        "Find artists with a top song and top album in the same year"
+        "Add a new employee",
+        "Add a role to a new employee",
+        "Add a new department",
+        "View an existing employee",
+        "View an existing employee's role",
+        "View all departments",
+        "Update an employee's role"
       ]
     })
     .then(function(answer) {
