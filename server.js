@@ -15,10 +15,10 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  addEmployee();
+  employeeTracker();
 });
 
-const addEmployee = () => {
+const employeeTracker = () => {
   inquirer
     .prompt({
       name: "action",
@@ -36,24 +36,32 @@ const addEmployee = () => {
     })
     .then(function(answer) {
       switch (answer.action) {
-      case "Find songs by artist":
-        artistSearch();
+      case "Add a new employee":
+        addEmployee();
         break;
 
-      case "Find all artists who appear more than once":
-        multiSearch();
+      case "Add a role to a new employee":
+        addRole();
         break;
 
-      case "Find data within a specific range":
-        rangeSearch();
+      case "Add a new department":
+        addDepartment();
         break;
 
-      case "Search for a specific song":
-        songSearch();
+      case "View an existing employee":
+        viewEmployee();
         break;
 
-      case "Find artists with a top song and top album in the same year":
-        songAndAlbumSearch();
+      case "View an existing employee's role":
+        viewRole();
+        break;
+          
+      case "View all departments":
+        viewDepartments();
+        break;
+          
+      case "Update an employee's role":
+        updateRole();
         break;
       }
     });
