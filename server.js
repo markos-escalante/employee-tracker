@@ -22,7 +22,7 @@ const employeeTracker = () => {
   inquirer
     .prompt({
       name: "action",
-      type: "rawlist",
+      type: "list",
       message: "Welcome to the employee tracker! What would you like to do?",
       choices: [
         "Add a new employee",
@@ -141,7 +141,7 @@ const addDepartment = () => {
     )
       .then(function (answer) {
           const query = "INSERT INTO department SET ?";
-          connection.query(query, { answer }, function (err, res) {
+          connection.query(query, answer, function (err, res) {
               if (err) throw err;
               employeeTracker();
           }) 
