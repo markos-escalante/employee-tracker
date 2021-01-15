@@ -140,7 +140,7 @@ const addDepartment = () => {
         }],
     )
       .then(function (answer) {
-          const query = "INSERT TO employee";
+          const query = "INSERT INTO department SET ?";
           connection.query(query, { answer }, function (err, res) {
               if (err) throw err;
               employeeTracker();
