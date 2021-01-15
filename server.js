@@ -189,8 +189,8 @@ const updateRole = () => {
             }]
         )
         .then(function (answer) {
-            const query = "UPDATE employee_role WHERE role_title = ? ";
-            connection.query(query, { answer }, function (err, res) {
+            const query = "UPDATE employee_role SET role_title ? WHERE ? ";
+            connection.query(query, answer, function (err, res) {
                 if (err) throw err;
                 console.table(res);
                 employeeTracker();
