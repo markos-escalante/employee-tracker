@@ -176,24 +176,27 @@ const viewDepartments = () => {
 }
 
 const updateRole = () => {
-    inquirer
-        .prompt([{
-            name: "update_employee",
-            type: "input",
-            message: "Please enter the employee's id number that you would like to update"
-        },
-            {
-                name: "employee_new_role",
-                type: "input",
-                message: "Please enter the employee's new role"
-            }]
-        )
-        .then(function (answer) {
-            const query = "UPDATE employee_role SET role_title ? WHERE ? ";
-            connection.query(query, answer, function (err, res) {
-                if (err) throw err;
-                console.table(res);
-                employeeTracker();
-            });
-        });
-}
+  inquirer
+    .prompt([{
+      name: "update_employee",
+      type: "input",
+      message: "Please enter the employee's id number that you would like to update"
+    },
+    {
+      name: "employee_new_role",
+      type: "input",
+      message: "Please enter the employee's new role"
+    }]
+    )
+    .then(function (answer) {
+      const query = "UPDATE position SET role_title = ? WHERE = ?";
+      connection.query(query, [req.body.quote, req.params.id],
+        function (err, res) {
+          if (err) throw err;
+          console.table(res)
+        }
+      )
+      employeeTracker();
+    }
+    )
+};
